@@ -31,7 +31,7 @@ Para auxiliar no entendimento, elaboramos um diagrama de classes simples contend
 ![diagramadeclasse](https://user-images.githubusercontent.com/4011040/197817709-3e4cfb77-e863-4096-a610-8290f71b8aef.png)
 
 **Tecnologias a serem utilizadas:**
-- Java 1.8.X;
+- Java;
 - Spring Boot;
 - Maven;
 - Thymeleaf;
