@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset='utf-8'>
+    <title>Login</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta http-equiv="content-language" content="pt-br" />
+    <meta name="robots" content="index, follow" />
+    <link rel="stylesheet" type="text/css" href="/css/login.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="login-form">
+            <h2>Login</h2>
+            <form method="post" action="/login?formAction=login">
+                <div class="form-group">
+                    <label for="FormLoginEmail">Email</label>
+                    <input type="email" id="FormLoginEmail" name="FormLoginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="FormLoginPassword">Senha</label>
+                    <input type="password" id="FormLoginPassword" name="FormLoginPassword" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit">Login</button>
+                </div>
+                <div class="error-message">
+                    <!-- Exiba mensagens de erro aqui, se necessário -->
+                    <p style="color: red; font-size: 12px;"></p>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
