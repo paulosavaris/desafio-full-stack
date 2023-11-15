@@ -8,5 +8,7 @@ import br.edu.unoesc.desafiofullstack.Entidades.Usuario;
 @Repository
 public interface UsuariosRepository extends JpaRepository<Usuario, Long> {
 
+    Usuario findByEmailAndSenha(String FormLoginEmail, String FormLoginPassword);
+
     
 }
