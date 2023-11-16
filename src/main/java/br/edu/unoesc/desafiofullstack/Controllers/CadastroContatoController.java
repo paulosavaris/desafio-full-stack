@@ -31,12 +31,6 @@ public class CadastroContatoController {
         // Verifica se o usuário está logado
         if (autenticacaoService.isUsuarioLogado(session)) {
 
-            // Long idpessoa = Long.parseLong(id);
-            // Optional<Pessoa> infoContato =
-            // contatoPessoaRepository.findByIdpessoa(idpessoa);
-
-            // model.addAttribute("infoContato", infoContato);
-
             return "cadastroContato";
         } else {
             return "redirect:/login";

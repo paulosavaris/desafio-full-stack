@@ -11,17 +11,15 @@
     <meta name="robots" content="index, follow" />
     <link rel="stylesheet" type="text/css" href="/css/accordion.css">
     <link rel="stylesheet" type="text/css" href="/css/home.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 
 <body style="display: flex; flex-direction: column;">
 
     <div class="header_trab">
         <h2 class="h2_trabalhos" th:text="${infoPessoa.nome}"></h2>
-        <div class="form-group">
-            <a th:href="@{/cadastroPessoas}">
-                <button type="button" class="butao">Cadastrar Pessoa</button>
-            </a>
-        </div>
     </div>
 
     <div class="container">
@@ -29,8 +27,9 @@
             <div class="form-group">
                 <div class="div_sub_titulo"> Pessoas
                     <div class="form-group">
-                        <a th:href="@{/cadastroPessoas}">
-                            <button type="button" class="butao">Cadastrar Pessoa</button>
+                        <a>
+                            <button type="button" class="remove-pessoa-button"
+                            th:attr="data-pessoa-id=${infoPessoa.id}">Remover</button>
                         </a>
                     </div>
                 </div>
@@ -43,25 +42,23 @@
                         <table id="tabela-tarefas">
                             <thead>
                                 <tr>
-                                    <th style="width:30%">Nome</th>
-                                    <th style="width:30%">CPF</th>
-                                    <th style="width:30%">Data Nascimento</th>
+                                    <th style="width:30%">Telefone</th>
+                                    <th style="width:30%">Email</th>
                                     <th style="width:30%">Opcoes</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr th:each="result : ${pessoas}">
+                                <tr th:each="contato : ${infoContato}">
                                     <td>
-                                        <a class="a_tarefas" th:attr="href=@{'/pessoa/' + ${result.id}}"
-                                            th:text="${result.nome}"></a>
+                                        <a class="a_tarefas"
+                                            th:attr="href=@{'/pessoa/' + ${contato.idpessoa} + '/editContato/' + ${contato.id}}"
+                                            th:text="${contato.telefone}"></a>
                                     </td>
-                                    <td th:text="${result.CPF}"> </td>
-                                    <td th:text="${result.dataNascimento}"></td>
+                                    <td th:text="${contato.email}"> </td>
                                     <td class="td_membro">
-                                        <button type="button" class="remove-button"
-                                            th:attr="data-member-id=${result[1].idMembros}, data-work-id=${idtrab}">Remover</button>
-                                        <button type="button" class="remove-button"
-                                            th:attr="data-member-id=${result[1].idMembros}, data-work-id=${idtrab}">Editar</button>
+                                        <button type="button" class="remove-contato-button"
+                                            th:attr="data-contato-id=${contato.id}">Remover</button>
+                                        <!-- <button type="button">Editar</button> -->
                                     </td>
                                 </tr>
                             </tbody>
@@ -73,25 +70,31 @@
                         <table id="tabela-tarefas">
                             <thead>
                                 <tr>
-                                    <th style="width:30%">Nome</th>
-                                    <th style="width:30%">CPF</th>
-                                    <th style="width:30%">Data Nascimento</th>
+                                    <th style="width:30%">CEP</th>
+                                    <th style="width:30%">Logradouto</th>
+                                    <th style="width:30%">Numero</th>
+                                    <th style="width:30%">Bairro</th>
+                                    <th style="width:30%">Municipio e Estado</th>
                                     <th style="width:30%">Opcoes</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr th:each="result : ${pessoas}">
+                                <tr th:each="enderecos : ${infoEndereco}">
                                     <td>
-                                        <a class="a_tarefas" th:attr="href=@{'/pessoa/' + ${result.id}}"
-                                            th:text="${result.nome}"></a>
+                                        <a class="a_tarefas" th:attr="href=@{'/pessoa/' + ${enderecos.id}}"
+                                            th:text="${enderecos.cep}"></a>
                                     </td>
-                                    <td th:text="${result.CPF}"> </td>
-                                    <td th:text="${result.dataNascimento}"></td>
+                                    <td th:text="${enderecos.logradouro}"> </td>
+                                    <td th:text="${enderecos.numero}"></td>
+                                    <td th:text="${enderecos.bairro}"> </td>
+                                    <td th:text="${enderecos.municipio} + ' - ' + ${enderecos.estado}"></td>
+
+
+
                                     <td class="td_membro">
                                         <button type="button" class="remove-button"
-                                            th:attr="data-member-id=${result[1].idMembros}, data-work-id=${idtrab}">Remover</button>
-                                        <button type="button" class="remove-button"
-                                            th:attr="data-member-id=${result[1].idMembros}, data-work-id=${idtrab}">Editar</button>
+                                            th:attr="data-end-id=${enderecos.id}">Remover</button>
+                                        <button type="button">Editar</button> 
                                     </td>
                                 </tr>
                             </tbody>
@@ -106,8 +109,15 @@
                     <button type="button" class="butao" style="margin: 0px 0px 4px 4px">Sair / LogOff</button>
                 </a>
             </div>
+            <div class="form-group">
+                <a th:href="@{/home}">
+                    <button type="button" class="butao">Voltar</button>
+                </a>
+            </div>
         </div>
     </div>
+
+
 
     <script>
         var accordions = document.getElementsByClassName("accordion");
@@ -123,6 +133,81 @@
                 }
             });
         }
+
+    // Adicione um ouvinte de evento a todos os botões de remoção
+    const removeButtons = document.querySelectorAll(".remove-button");
+    removeButtons.forEach(button => {
+        button.addEventListener("click", function () {
+            const endId = this.getAttribute("data-end-id");
+
+            // Envie uma solicitação para o servidor para remover o membro
+            fetch(`/removeEnd/${endId}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+            })
+                .then(response => {
+                    if (response.status === 200) {
+                        alert("Endereco Removido com sucesso.");
+                        window.location.reload(); // Recarrega a página
+                        // Atualize a lista de membros após a remoção
+                    } else {
+                        alert("Erro ao remover o Endereco.");
+                    }
+                });
+        });
+    });
+
+
+    const removeContatoButtons = document.querySelectorAll(".remove-contato-button");
+    removeContatoButtons.forEach(button => {
+        button.addEventListener("click", function () {
+            const contatoId = this.getAttribute("data-contato-id");
+
+            // Envie uma solicitação para o servidor para remover o membro
+            fetch(`/removeContato/${contatoId}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+            })
+                .then(response => {
+                    if (response.status === 200) {
+                        alert("Contato Removido com sucesso.");
+                        window.location.reload(); // Recarrega a página
+                        // Atualize a lista de membros após a remoção
+                    } else {
+                        alert("Erro ao remover o contato.");
+                    }
+                });
+        });
+    });
+
+    const removePessoaButtons = document.querySelectorAll(".remove-pessoa-button");
+    removePessoaButtons.forEach(button => {
+        button.addEventListener("click", function () {
+            const pessoaId = this.getAttribute("data-pessoa-id");
+
+            // Envie uma solicitação para o servidor para remover o membro
+            fetch(`/removePessoa/${pessoaId}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+            })
+                .then(response => {
+                    if (response.status === 200) {
+                        alert("Pessoa Removido com sucesso.");
+                        window.location.href = '/home';
+                    } else {
+                        alert("Erro ao remover  pessoa.");
+                    }
+                });
+        });
+    });
+
+
     </script>
 
 </body>
