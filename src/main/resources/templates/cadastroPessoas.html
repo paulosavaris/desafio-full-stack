@@ -18,43 +18,44 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 <body style="height:unset;">
     <div class="container">
         <div class="login-form">
-            <h2>Cadastro</h2>
+            <h2>Cadastro de Pessoa</h2>
             <form method="post" action="/cadastroPessoas?formAction=cadastra">
                 <!-- metodo para enviar/cadastrar requisicao formAction para distinguir os Post
                  nas classe-->
                 <div class="div_geral">
                     <div class="div_esquerda-group">
-                        <button class="accordion">Dados Pessoais</button>
-                        <div class="panel">
-                            <div class="form-group">
-                                <label for="CadastroNome">Nome completo</label>
-                                <input type="text" id="CadastroNome" name="CadastroNome" required>
+                        <div class="form-group">
+                            <label for="CadastroNome">Nome completo</label>
+                            <input type="text" id="CadastroNome" name="CadastroNome" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="CadastroCPF">CPF</label>
+                            <input type="text" id="CadastroCPF" name="CadastroCPF" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="CadastroDatNasc">Data de nascimento:</label>
+                            <input type="date" id="CadastroDatNasc" name="CadastroDatNasc" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="CadastroSexo">Genero:</label>
+                            <div class="div_ratio">
+                                <div class="div_sub_ratio">
+                                    <label for="masculino">Masculino</label>
+                                    <input type="radio" id="masculino" name="CadastroSexo" value="masculino">
+                                </div>
+                                <div class="div_sub_ratio">
+                                    <label for="feminino">Feminino</label>
+                                    <input type="radio" id="feminino" name="CadastroSexo" value="feminino">
+                                </div>
+                                <div class="div_sub_ratio">
+                                    <label for="outro">Outro</label>
+                                    <input type="radio" id="outro" name="CadastroSexo" value="outro">
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="CadastroCPF">CPF</label>
-                                <input type="text" id="CadastroCPF" name="CadastroCPF" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="CadastroDatNasc">Data de nascimento:</label>
-                                <input type="date" id="CadastroDatNasc" name="CadastroDatNasc" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="CadastroSexo">Genero:</label>
-
-                                <label for="masculino">Masculino</label>
-                                <input type="radio" id="masculino" name="CadastroSexo" value="masculino">
-
-                                <label for="feminino">Feminino</label>
-                                <input type="radio" id="feminino" name="CadastroSexo" value="feminino">
-
-                                <label for="outro">Outro</label>
-                                <input type="radio" id="outro" name="CadastroSexo" value="outro">
-
-                            </div>
-                            <div class="error-message">
-                                <!-- Exiba mensagens de erro aqui, se necessário -->
-                                <p th:text="${param.errorC}" style="color: red; font-size: 12px;"></p>
-                            </div>
+                        </div>
+                        <div class="error-message">
+                            <!-- Exiba mensagens de erro aqui, se necessário -->
+                            <p th:text="${param.errorC}" style="color: red; font-size: 12px;"></p>
                         </div>
                     </div>
 
@@ -63,34 +64,17 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                 <div class="form-group">
                     <button type="submit" value="Cadastrar">Cadastrar</button>
                 </div>
-                <div class="error-message">
-                    <!-- Exiba mensagens de erro aqui, se necessário -->
-                    <p th:text="${param.errorC}" style="color: red; font-size: 12px;"></p>
-                </div>
             </form>
             <div class="success-message">
                 <p th:text="${session.cadastroSucesso}" style="color: green; font-size: 12px;"></p>
             </div>
+            <div class="form-group">
+                <a th:href="@{/home}">
+                    <button type="button" class="butao">Home</button>
+                </a>
+            </div>
         </div>
     </div>
-
-
-    <script>
-        var accordions = document.getElementsByClassName("accordion");
-
-        for (var i = 0; i < accordions.length; i++) {
-            accordions[i].addEventListener("click", function () {
-                this.classList.toggle("active");
-                var panel = this.nextElementSibling;
-                if (panel.style.display === "block") {
-                    panel.style.display = "none";
-                } else {
-                    panel.style.display = "block";
-                }
-            });
-        }
-    </script>
-
 </body>
 
 </html>

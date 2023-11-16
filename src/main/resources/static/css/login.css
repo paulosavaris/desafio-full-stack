@@ -28,13 +28,13 @@ body {
 	margin-bottom: 15px;
 }
 
-.form-group label {
+/* .form-group label {
 	display: block;
 	margin-bottom: 5px;
-}
+} */
 
 .form-group input {
-	width: 100%;
+	width: -webkit-fill-available;
 	padding: 8px;
 	border: 1px solid #ccc;
 	border-radius: 3px;
@@ -48,3 +48,31 @@ body {
 	border-radius: 3px;
 	cursor: pointer;
 }
+
+/* Estilos para os campos preenchidos automaticamente */
+.form-group input.auto-filled {
+    background-color: #ceefff; /* Defina a cor desejada */
+}
+
+
+.div_ratio, .div_sub_ratio{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
+    justify-content: space-around;
+    gap: 20px;
+ }
+
+ .div_ratio{
+    border: 1px solid;
+    margin-inline: 60px;
+ }
+
+ .form-group input[type="radio" i]{
+    width:auto;
+    margin: 0px;
+    align-self: center;
+    
+ }

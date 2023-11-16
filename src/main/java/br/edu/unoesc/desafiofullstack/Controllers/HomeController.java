@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import br.edu.unoesc.desafiofullstack.Autenticacao.AutenticacaoService;
 import br.edu.unoesc.desafiofullstack.Entidades.Pessoa;
 import br.edu.unoesc.desafiofullstack.Repositories.PessoaRepository;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -35,5 +37,12 @@ public class HomeController {
         }
 
     }
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request, HttpServletResponse response) {
+        // Finaliza a sessão atual
+        request.getSession().invalidate();
 
+        // Redireciona para a página de login ou qualquer outra página
+        return "redirect:/login";
+    }
 }

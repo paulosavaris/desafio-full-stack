@@ -27,30 +27,30 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                     <div class="div_direta-group">
                         <div class="div_direita">
                             <h2>Endereço</h2>
-                                <div class="form-group">
-                                    <label for="CadastroCEP">CEP</label>
-                                    <input type="text" id="CadastroCEP" name="CadastroCEP" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="CadastroLogradouro">Logradouro</label>
-                                    <input type="text" id="CadastroLogradouro" name="CadastroLogradouro" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="CadastroNumero">Numero</label>
-                                    <input type="text" id="CadastroNumero" name="CadastroNumero" required >
-                                </div>
-                                <div class="form-group">
-                                    <label for="CadastroBairro">Bairro</label>
-                                    <input type="text" id="CadastroBairro" name="CadastroBairro" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="CadastroMunicipio">Municipio</label>
-                                    <input type="text" id="CadastroMunicipio" name="CadastroMunicipio" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="CadastroEstado">Estado</label>
-                                    <input type="text" id="CadastroEstado" name="CadastroEstado" required>
-                                </div>
+                            <div class="form-group">
+                                <label for="CadastroCEP">CEP</label>
+                                <input type="text" id="CadastroCEP" name="CadastroCEP" maxlength="8" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="CadastroLogradouro">Logradouro</label>
+                                <input type="text" id="CadastroLogradouro" name="CadastroLogradouro" readonly required>
+                            </div>
+                            <div class="form-group">
+                                <label for="CadastroNumero">Numero</label>
+                                <input type="text" id="CadastroNumero" name="CadastroNumero" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="CadastroBairro">Bairro</label>
+                                <input type="text" id="CadastroBairro" name="CadastroBairro" readonly required>
+                            </div>
+                            <div class="form-group">
+                                <label for="CadastroMunicipio">Municipio</label>
+                                <input type="text" id="CadastroMunicipio" name="CadastroMunicipio" readonly required>
+                            </div>
+                            <div class="form-group">
+                                <label for="CadastroEstado">Estado</label>
+                                <input type="text" id="CadastroEstado" name="CadastroEstado" readonly required>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -75,7 +75,60 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#CadastroCEP').on('input', function () {
+                var cep = $(this).val();
+                if (cep.length === 8) {
+                    $.ajax({
+                        url: '/buscarCEP?CEP=' + cep, // Seu endpoint no backend
+                        type: 'POST',
+                        success: function (data) {
+                            // Preencha os campos do formulário com os dados recebidos
+                            if (data.logradouro !== null && data.logradouro !== "") {
+                                $('#CadastroLogradouro').val(data.logradouro).prop('readonly', true);
+                            } else {
+                                $('#CadastroLogradouro').prop('readonly', false);
+                            }
 
+                            if (data.bairro !== null && data.bairro !== "") {
+                                $('#CadastroBairro').val(data.bairro).prop('readonly', true);
+                            } else {
+                                $('#CadastroBairro').prop('readonly', false);
+                            }
+
+                            if (data.localidade !== null && data.localidade !== "") {
+                                $('#CadastroMunicipio').val(data.localidade).prop('readonly', true);
+                            } else {
+                                $('#CadastroMunicipio').prop('readonly', false);
+                            }
+
+                            if (data.uf !== null && data.uf !== "") {
+                                $('#CadastroEstado').val(data.uf).prop('readonly', true);
+                            } else {
+                                $('#CadastroEstado').prop('readonly', false);
+                            }
+
+                            // Adiciona classes específicas aos campos preenchidos pela API
+                            $('#CadastroLogradouro').toggleClass('auto-filled', data.logradouro !== null && data.logradouro !== "");
+                            $('#CadastroBairro').toggleClass('auto-filled', data.bairro !== null && data.bairro !== "");
+                            $('#CadastroMunicipio').toggleClass('auto-filled', data.localidade !== null && data.localidade !== "");
+                            $('#CadastroEstado').toggleClass('auto-filled', data.uf !== null && data.uf !== "");
+
+                            // Desbloquear campos para edição
+                            $('#CadastroNumero').prop('readonly', false);
+                        },
+                        error: function (error) {
+                            console.log(error);
+                            // Limpar campos e habilitar todos para edição
+                            $('input[type="text"]').val('').prop('readonly', false);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

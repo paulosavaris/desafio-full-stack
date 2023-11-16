@@ -37,11 +37,16 @@ public class CadastroPessoaController {
     public String cadastraPessoa(PessoaRecord dados, HttpSession session) {
         if (autenticacaoService.isUsuarioLogado(session)) {
 
+            if (pessoaRepository.existsByCPF(dados.CadastroCPF())) {
+                return "redirect:/cadastroPessoas?errorC=CPF já cadastrado";
+            }
             var cadastroPessoa = new Pessoa(dados);
 
             pessoaRepository.save(cadastroPessoa);
-
+            // Definir um atributo de sessão para indicar que o cadastro foi bem-sucedido
+            session.setAttribute("cadastroSucesso", "Usuário cadastrado com sucesso!");
             return "cadastroPessoas";
+
         } else {
             return "redirect:/login";
         }

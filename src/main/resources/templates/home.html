@@ -13,52 +13,66 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
     <meta name="robots" content="index, follow" />
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
     <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
-
+    <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/home.css">
 </head>
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('#tabela-tarefas').DataTable();
     });
 </script>
 
-<body style="display: flex; flex-direction: column; background: #AFAFAF;">
+<body style="display: flex; flex-direction: column;">
 
-        <div class="header_trab">
-            <div>
-                <h2 class="h2_trabalhos">Pessoas Cadastradas</h2>
-            </div>
+    <div class="header_trab">
+        <div>
+            <h2 class="h2_trabalhos">Pessoas Cadastradas</h2>
         </div>
+    </div>
 
-        <div class="container">
-            <div class="cadastro-form">
-                <div class="form-group">
-                    <div class="div_sub_titulo"> Pessoas</div>
-                </div>
-                <div class="seila">
+    <div class="container">
+        <div class="cadastro-form">
+            <div class="form-group">
+                <div class="div_sub_titulo"> Pessoas
                     <div class="form-group">
-                        <table id="tabela-tarefas">
-                            <thead>
-                                <tr>
-                                    <th  style="width:30%">Nome</th>
-                                    <th  style="width:30%">CPF</th>
-                                    <th  style="width:30%">Data Nascimento</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr th:each="result : ${pessoas}">
-                                    <td>
-                                        <a class="a_tarefas" th:attr="href=@{'/pessoa/' + ${result.id}}" th:text="${result.nome}"></a>
-                                    </td>
-                                    <td th:text="${result.CPF}"> </td>
-                                    <td th:text="${result.dataNascimento}"></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <a th:href="@{/cadastroPessoas}">
+                            <button type="button" class="butao">Cadastrar Pessoa</button>
+                        </a>
                     </div>
                 </div>
+
+            </div>
+            <div class="seila">
+                <div class="form-group">
+                    <table id="tabela-tarefas">
+                        <thead>
+                            <tr>
+                                <th style="width:30%">Nome</th>
+                                <th style="width:30%">CPF</th>
+                                <th style="width:30%">Data Nascimento</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="result : ${pessoas}">
+                                <td>
+                                    <a class="a_tarefas" th:attr="href=@{'/pessoa/' + ${result.id}}"
+                                        th:text="${result.nome}"></a>
+                                </td>
+                                <td th:text="${result.CPF}"> </td>
+                                <td th:text="${result.dataNascimento}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="form-group">
+                <a href="/logout">
+                    <button type="button" class="butao" style="margin: 0px 0px 4px 4px">Sair / LogOff</button>
+                </a>
             </div>
         </div>
+    </div>
 </body>
 
 </html>

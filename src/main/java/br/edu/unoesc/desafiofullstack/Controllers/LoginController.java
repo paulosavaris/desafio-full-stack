@@ -35,7 +35,7 @@ public class LoginController {
             session.setAttribute("idUsuarioLogado", usuario.getId());
 
             // Redirecione para a página após o login bem-sucedido
-            return "redirect:/cadastroPessoas";
+            return "redirect:/home";
         } else {
             return "redirect:/login?errorL=Email ou senha incorretos";
         }
