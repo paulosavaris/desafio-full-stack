@@ -1,0 +1,43 @@
+
+create database appunoesc_teste;
+-- alterar no application.properties
+begin
+	
+	
+rollback
+
+
+
+CREATE TABLE usuario (
+    id SERIAL PRIMARY KEY,
+	nome VARCHAR(255) NOT NULL,
+	email varchar(255) not null
+);
+
+
+CREATE TABLE pessoa (
+    id SERIAL PRIMARY KEY,
+	nome VARCHAR(255) NOT NULL,
+	CPF VARCHAR(255) NOT NULL,
+	dataNascimento date NOT NULL,
+	sexo VARCHAR(255) 
+);
+
+
+CREATE TABLE endereco (
+  idEnd SERIAL PRIMARY KEY,
+  cep VARCHAR(255) NOT NULL,
+  logradouro VARCHAR(255) NOT NULL,
+  numero Varchar(20) NOT NULL,
+  bairro VARCHAR(255) NOT NULL,
+  municipio VARCHAR(255) NOT NULL,
+  estado VARCHAR(255) NOT NULL,
+  idPessoa INTEGER REFERENCES unoesc.pessoa(id) on delete cascade
+);
+
+CREATE TABLE contato (
+  idContato SERIAL PRIMARY KEY,
+  telefone VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  idPessoa INTEGER REFERENCES unoesc.pessoa(id) on delete cascade
+);
