@@ -32,12 +32,12 @@ CREATE TABLE endereco (
   bairro VARCHAR(255) NOT NULL,
   municipio VARCHAR(255) NOT NULL,
   estado VARCHAR(255) NOT NULL,
-  idPessoa INTEGER REFERENCES unoesc.pessoa(id) on delete cascade
+  idPessoa INTEGER REFERENCES pessoa(id) on delete cascade
 );
 
 CREATE TABLE contato (
   idContato SERIAL PRIMARY KEY,
   telefone VARCHAR(255) NOT NULL,
   email VARCHAR(255) NOT NULL,
-  idPessoa INTEGER REFERENCES unoesc.pessoa(id) on delete cascade
+  idPessoa INTEGER REFERENCES pessoa(id) on delete cascade
 );
