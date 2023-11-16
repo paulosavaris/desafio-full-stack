@@ -1,0 +1,66 @@
+package br.edu.unoesc.desafiofullstack.Controllers;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import br.edu.unoesc.desafiofullstack.Autenticacao.AutenticacaoService;
+import br.edu.unoesc.desafiofullstack.Entidades.ContatoPessoa;
+import br.edu.unoesc.desafiofullstack.Entidades.EnderecoPessoa;
+import br.edu.unoesc.desafiofullstack.Record.ContatoPessoaRecord;
+import br.edu.unoesc.desafiofullstack.Record.EnderecoPessoaRecord;
+import br.edu.unoesc.desafiofullstack.Repositories.CadastroEndRepository;
+import br.edu.unoesc.desafiofullstack.Repositories.ContatoPessoaRepository;
+import br.edu.unoesc.desafiofullstack.Repositories.PessoaRepository;
+import jakarta.servlet.http.HttpSession;
+
+@Controller
+public class CadastroEndController {
+
+    @Autowired
+    private AutenticacaoService autenticacaoService;
+
+    @Autowired
+    private PessoaRepository pessoaRepository;
+
+    @Autowired
+    private ContatoPessoaRepository contatoPessoaRepository;
+
+    @Autowired
+    private CadastroEndRepository cadastroEndRepository;
+
+    @GetMapping("/pessoa/{id}/cadastroEndereco")
+    public String endereco(@PathVariable String id, HttpSession session, Model model) {
+        // Verifica se o usuário está logado
+        if (autenticacaoService.isUsuarioLogado(session)) {
+
+            // Long idpessoa = Long.parseLong(id);
+            // Optional<Pessoa> infoContato =
+            // contatoPessoaRepository.findByIdpessoa(idpessoa);
+
+            // model.addAttribute("infoContato", infoContato);
+
+            return "cadastroEndereco";
+        } else {
+            return "redirect:/login";
+        }
+
+    }
+
+    @PostMapping("/pessoa/{id}/cadastroEndereco")
+    public String adicionarEndereco(@PathVariable Long id, EnderecoPessoaRecord dados,
+            HttpSession session, Model model) {
+
+        EnderecoPessoaRecord endereco = new EnderecoPessoaRecord(dados.CadastroCEP(), dados.CadastroLogradouro()
+            , dados.CadastroNumero(), dados.CadastroBairro(), dados.CadastroMunicipio(), dados.CadastroEstado(), id);
+        // Crie e associe o membro ao trabalho e ao usuário
+        var enderecoCad = new EnderecoPessoa(endereco);
+
+        cadastroEndRepository.save(enderecoCad);
+
+        return "redirect:/pessoa/" + id + "/cadastroEndereco";
+    }
+}

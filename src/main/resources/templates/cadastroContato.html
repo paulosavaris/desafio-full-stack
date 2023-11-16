@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html lang="pt-br">
+
+<head>
+    <meta charset='utf-8'>
+    <title>Cadastro de contatos</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta http-equiv="content-language" content="pt-br" />
+    <meta name="robots" content="index, follow" />
+    <link rel="stylesheet" type="text/css" href="/css/login.css">
+    <link rel="stylesheet" type="text/css" href="/css/accordion.css">
+</head>
+
+<body style="height:unset;">
+    <div class="container">
+        <div class="login-form">
+            <h2>Cadastro</h2>
+            <form method="post">
+                <!-- metodo para enviar/cadastrar requisicao formAction para distinguir os Post
+                 nas classe-->
+                <div class="div_geral">
+                    <div class="div_esquerda-group">
+                        <div>
+                            <h2>Dados de Contato</H2>
+                                <div class="form-group">
+                                    <label for="CadastroTelefone">telefone</label>
+                                    <input type="text" id="CadastroTelefone" name="CadastroTelefone" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="CadastroEmail">Email</label>
+                                    <input type="email" id="CadastroEmail" name="CadastroEmail" required>
+                                </div>
+                                <div class="error-message">
+                                    <!-- Exiba mensagens de erro aqui, se necessário -->
+                                    <p th:text="${param.errorC}" style="color: red; font-size: 12px;"></p>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" value="Cadastrar">Cadastrar</button>
+                </div>
+                <div class="error-message">
+                    <!-- Exiba mensagens de erro aqui, se necessário -->
+                    <p th:text="${param.errorC}" style="color: red; font-size: 12px;"></p>
+                </div>
+                <div class="form-group">
+                    <a th:href="@{/pessoa/{id}(id=${id})}">
+                        <button type="button" class="butao">Voltar</button>
+                    </a>
+                </div>
+            </form>
+            <div class="success-message">
+                <p th:text="${session.cadastroSucesso}" style="color: green; font-size: 12px;"></p>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

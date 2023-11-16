@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+</html>
+
+<head>
+    <meta charset='utf-8'>
+    <title>Pessoa</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta http-equiv="content-language" content="pt-br" />
+    <meta name="robots" content="index, follow" />
+
+</head>
+
+<body>
+    <div>
+        <h2  th:text="${infoPessoa.nome}"> </h2>
+    </div>
+    <p th:text="${infoPessoa.CPF}"></p>
+
+    <div class="form-group">
+        <a th:href="@{/pessoa/{id}/cadastroContato(id=${id})}">
+            <button type="button" class="butao">Adicionar Contato</button>
+        </a>
+    </div>
+
+    <div class="form-group">
+        <a th:href="@{/pessoa/{id}/cadastroEndereco(id=${id})}">
+            <button type="button" class="butao">Adicionar Endereco</button>
+        </a>
+    </div>
+    <div class="form-group">
+        <a th:href="@{/home}">
+            <button type="button" class="butao">Voltar</button>
+        </a>
+    </div>
+</body>
+
+
+</html>

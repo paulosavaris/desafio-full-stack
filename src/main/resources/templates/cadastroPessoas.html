@@ -7,7 +7,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 
 <head>
     <meta charset='utf-8'>
-    <title>Login</title>
+    <title>Cadastro de Pessoas</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <meta http-equiv="content-language" content="pt-br" />
     <meta name="robots" content="index, follow" />
@@ -19,7 +19,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
     <div class="container">
         <div class="login-form">
             <h2>Cadastro</h2>
-            <form method="post" action="/login?formAction=cadastra">
+            <form method="post" action="/cadastroPessoas?formAction=cadastra">
                 <!-- metodo para enviar/cadastrar requisicao formAction para distinguir os Post
                  nas classe-->
                 <div class="div_geral">
@@ -56,58 +56,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                 <p th:text="${param.errorC}" style="color: red; font-size: 12px;"></p>
                             </div>
                         </div>
-
-
-                        <div>
-                            <button class="accordion">Dados de Contato</button>
-                            <div class="panel">
-                                <div class="form-group">
-                                    <label for="CadastroTelefone">telefone</label>
-                                    <input type="text" id="CadastroTelefone" name="CadastroTelefone" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="CadastroEmail">Email</label>
-                                    <input type="email" id="CadastroEmail" name="CadastroEmail" required>
-                                </div>
-                                <div class="error-message">
-                                    <!-- Exiba mensagens de erro aqui, se necessário -->
-                                    <p th:text="${param.errorC}" style="color: red; font-size: 12px;"></p>
-                                </div>
-                            </div>
-                        </div>
                     </div>
 
-                    <div class="div_direta-group">
-                        <div class="div_direita">
-                            <button class="accordion">Endereço</button>
-                            <div class="panel">
-                                <div class="form-group">
-                                    <label for="CadastroCEP">CEP</label>
-                                    <input type="text" id="CadastroCEP" name="CadastroCEP" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="CadastroLogradouro">Logradouro</label>
-                                    <input type="text" id="CadastroLogradouro" name="CadastroLogradouro" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="CadastroNumero">Numero</label>
-                                    <input type="text" id="CadastroNumero" name="CadastroNumero" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="CadastroBairro">Bairro</label>
-                                    <input type="text" id="CadastroBairro" name="CadastroBairro" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="CadastroMunicipio">Municipio</label>
-                                    <input type="text" id="CadastroMunicipio" name="CadastroMunicipio" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="CadastroEstado">Estado</label>
-                                    <input type="text" id="CadastroEstado" name="CadastroEstado" required>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
                 <div class="form-group">

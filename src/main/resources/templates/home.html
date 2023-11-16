@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html lang="pt-br">
+
+<head>
+    <meta charset='utf-8'>
+    <title>Home</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta http-equiv="content-language" content="pt-br" />
+    <meta name="robots" content="index, follow" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+
+</head>
+<script>
+    $(document).ready(function() {
+        $('#tabela-tarefas').DataTable();
+    });
+</script>
+
+<body style="display: flex; flex-direction: column; background: #AFAFAF;">
+
+        <div class="header_trab">
+            <div>
+                <h2 class="h2_trabalhos">Pessoas Cadastradas</h2>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="cadastro-form">
+                <div class="form-group">
+                    <div class="div_sub_titulo"> Pessoas</div>
+                </div>
+                <div class="seila">
+                    <div class="form-group">
+                        <table id="tabela-tarefas">
+                            <thead>
+                                <tr>
+                                    <th  style="width:30%">Nome</th>
+                                    <th  style="width:30%">CPF</th>
+                                    <th  style="width:30%">Data Nascimento</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="result : ${pessoas}">
+                                    <td>
+                                        <a class="a_tarefas" th:attr="href=@{'/pessoa/' + ${result.id}}" th:text="${result.nome}"></a>
+                                    </td>
+                                    <td th:text="${result.CPF}"> </td>
+                                    <td th:text="${result.dataNascimento}"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+
+</html>

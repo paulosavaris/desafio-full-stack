@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html lang="pt-br">
+
+<head>
+    <meta charset='utf-8'>
+    <title>Cadastro de Enderecos</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta http-equiv="content-language" content="pt-br" />
+    <meta name="robots" content="index, follow" />
+    <link rel="stylesheet" type="text/css" href="/css/login.css">
+    <link rel="stylesheet" type="text/css" href="/css/accordion.css">
+</head>
+
+<body style="height:unset;">
+    <div class="container">
+        <div class="login-form">
+            <h2>Cadastro</h2>
+            <form method="post">
+                <!-- metodo para enviar/cadastrar requisicao formAction para distinguir os Post
+                 nas classe-->
+                <div class="div_geral">
+
+                    <div class="div_direta-group">
+                        <div class="div_direita">
+                            <h2>Endereço</h2>
+                                <div class="form-group">
+                                    <label for="CadastroCEP">CEP</label>
+                                    <input type="text" id="CadastroCEP" name="CadastroCEP" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="CadastroLogradouro">Logradouro</label>
+                                    <input type="text" id="CadastroLogradouro" name="CadastroLogradouro" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="CadastroNumero">Numero</label>
+                                    <input type="text" id="CadastroNumero" name="CadastroNumero" required >
+                                </div>
+                                <div class="form-group">
+                                    <label for="CadastroBairro">Bairro</label>
+                                    <input type="text" id="CadastroBairro" name="CadastroBairro" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="CadastroMunicipio">Municipio</label>
+                                    <input type="text" id="CadastroMunicipio" name="CadastroMunicipio" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="CadastroEstado">Estado</label>
+                                    <input type="text" id="CadastroEstado" name="CadastroEstado" required>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" value="Cadastrar">Cadastrar</button>
+                </div>
+                <div class="error-message">
+                    <!-- Exiba mensagens de erro aqui, se necessário -->
+                    <p th:text="${param.errorC}" style="color: red; font-size: 12px;"></p>
+                </div>
+            </form>
+            <div class="success-message">
+                <p th:text="${session.cadastroSucesso}" style="color: green; font-size: 12px;"></p>
+            </div>
+            <div class="form-group">
+                <a th:href="@{/pessoa/{id}(id=${id})}">
+                    <button type="button" class="butao">Voltar</button>
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>
