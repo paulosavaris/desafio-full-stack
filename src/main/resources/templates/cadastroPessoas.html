@@ -12,37 +12,110 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
     <meta http-equiv="content-language" content="pt-br" />
     <meta name="robots" content="index, follow" />
     <link rel="stylesheet" type="text/css" href="/css/login.css">
+    <link rel="stylesheet" type="text/css" href="/css/accordion.css">
 </head>
 
-<body>
+<body style="height:unset;">
     <div class="container">
         <div class="login-form">
             <h2>Cadastro</h2>
             <form method="post" action="/login?formAction=cadastra">
                 <!-- metodo para enviar/cadastrar requisicao formAction para distinguir os Post
                  nas classe-->
-                <div class="form-group">
-                    <label for="CadastroNome">Nome</label>
-                    <input type="text" id="CadastroNome" name="CadastroNome" required>
-                </div>
-                <div class="form-group">
-                    <label for="CadastroEmail">Email</label>
-                    <input type="email" id="CadastroEmail" name="CadastroEmail" required>
-                </div>
-                <div class="form-group">
-                    <label for="CadastroPassword">Senha</label>
-                    <input type="password" id="CadastroPassword" name="CadastroPassword" required>
-                </div>
-                <div class="form-group">
-                    <label for="CadastroConfirmPassword">Confirmar Senha</label>
-                    <input type="password" id="CadastroConfirmPassword" name="CadastroConfirmPassword" required>
-                    <div class="error-message">
-                        <!-- Exiba mensagens de erro aqui, se necessário -->
-                        <p th:text="${param.errorC}" style="color: red; font-size: 12px;"></p>
+                <div class="div_geral">
+                    <div class="div_esquerda-group">
+                        <button class="accordion">Dados Pessoais</button>
+                        <div class="panel">
+                            <div class="form-group">
+                                <label for="CadastroNome">Nome completo</label>
+                                <input type="text" id="CadastroNome" name="CadastroNome" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="CadastroCPF">CPF</label>
+                                <input type="text" id="CadastroCPF" name="CadastroCPF" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="CadastroDatNasc">Data de nascimento:</label>
+                                <input type="date" id="CadastroDatNasc" name="CadastroDatNasc" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="CadastroSexo">Genero:</label>
+
+                                <label for="masculino">Masculino</label>
+                                <input type="radio" id="masculino" name="CadastroSexo" value="masculino">
+
+                                <label for="feminino">Feminino</label>
+                                <input type="radio" id="feminino" name="CadastroSexo" value="feminino">
+
+                                <label for="outro">Outro</label>
+                                <input type="radio" id="outro" name="CadastroSexo" value="outro">
+
+                            </div>
+                            <div class="error-message">
+                                <!-- Exiba mensagens de erro aqui, se necessário -->
+                                <p th:text="${param.errorC}" style="color: red; font-size: 12px;"></p>
+                            </div>
+                        </div>
+
+
+                        <div>
+                            <button class="accordion">Dados de Contato</button>
+                            <div class="panel">
+                                <div class="form-group">
+                                    <label for="CadastroTelefone">telefone</label>
+                                    <input type="text" id="CadastroTelefone" name="CadastroTelefone" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="CadastroEmail">Email</label>
+                                    <input type="email" id="CadastroEmail" name="CadastroEmail" required>
+                                </div>
+                                <div class="error-message">
+                                    <!-- Exiba mensagens de erro aqui, se necessário -->
+                                    <p th:text="${param.errorC}" style="color: red; font-size: 12px;"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="div_direta-group">
+                        <div class="div_direita">
+                            <button class="accordion">Endereço</button>
+                            <div class="panel">
+                                <div class="form-group">
+                                    <label for="CadastroCEP">CEP</label>
+                                    <input type="text" id="CadastroCEP" name="CadastroCEP" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="CadastroLogradouro">Logradouro</label>
+                                    <input type="text" id="CadastroLogradouro" name="CadastroLogradouro" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="CadastroNumero">Numero</label>
+                                    <input type="text" id="CadastroNumero" name="CadastroNumero" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="CadastroBairro">Bairro</label>
+                                    <input type="text" id="CadastroBairro" name="CadastroBairro" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="CadastroMunicipio">Municipio</label>
+                                    <input type="text" id="CadastroMunicipio" name="CadastroMunicipio" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="CadastroEstado">Estado</label>
+                                    <input type="text" id="CadastroEstado" name="CadastroEstado" required>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <button type="submit" value="Cadastrar">Cadastrar</button>
+                </div>
+                <div class="error-message">
+                    <!-- Exiba mensagens de erro aqui, se necessário -->
+                    <p th:text="${param.errorC}" style="color: red; font-size: 12px;"></p>
                 </div>
             </form>
             <div class="success-message">
@@ -50,6 +123,24 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             </div>
         </div>
     </div>
+
+
+    <script>
+        var accordions = document.getElementsByClassName("accordion");
+
+        for (var i = 0; i < accordions.length; i++) {
+            accordions[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.display === "block") {
+                    panel.style.display = "none";
+                } else {
+                    panel.style.display = "block";
+                }
+            });
+        }
+    </script>
+
 </body>
 
 </html>

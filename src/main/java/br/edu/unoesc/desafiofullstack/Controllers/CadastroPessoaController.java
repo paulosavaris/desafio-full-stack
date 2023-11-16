@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.edu.unoesc.desafiofullstack.Autenticacao.AutenticacaoService;
-import br.edu.unoesc.desafiofullstack.Repositories.UsuariosRepository;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
