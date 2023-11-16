@@ -11,7 +11,6 @@ import br.edu.unoesc.desafiofullstack.Autenticacao.AutenticacaoService;
 import br.edu.unoesc.desafiofullstack.Entidades.ContatoPessoa;
 import br.edu.unoesc.desafiofullstack.Record.ContatoPessoaRecord;
 import br.edu.unoesc.desafiofullstack.Repositories.ContatoPessoaRepository;
-import br.edu.unoesc.desafiofullstack.Repositories.PessoaRepository;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -19,9 +18,6 @@ public class CadastroContatoController {
 
     @Autowired
     private AutenticacaoService autenticacaoService;
-
-    @Autowired
-    private PessoaRepository pessoaRepository;
 
     @Autowired
     private ContatoPessoaRepository contatoPessoaRepository;

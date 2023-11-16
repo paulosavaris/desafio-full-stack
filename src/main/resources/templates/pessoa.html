@@ -29,7 +29,7 @@
                     <div class="form-group">
                         <a>
                             <button type="button" class="remove-pessoa-button"
-                            th:attr="data-pessoa-id=${infoPessoa.id}">Remover</button>
+                                th:attr="data-pessoa-id=${infoPessoa.id}">Remover</button>
                         </a>
                     </div>
                 </div>
@@ -51,14 +51,17 @@
                                 <tr th:each="contato : ${infoContato}">
                                     <td>
                                         <a class="a_tarefas"
-                                            th:attr="href=@{'/pessoa/' + ${contato.idpessoa} + '/editContato/' + ${contato.id}}"
                                             th:text="${contato.telefone}"></a>
                                     </td>
                                     <td th:text="${contato.email}"> </td>
                                     <td class="td_membro">
+                                        <div class="form-group" style="gap: 10px;">
                                         <button type="button" class="remove-contato-button"
                                             th:attr="data-contato-id=${contato.id}">Remover</button>
-                                        <!-- <button type="button">Editar</button> -->
+                                            <!-- <a th:href="@{'/pessoa/' + ${contato.idpessoa} + '/ContatoEdit/' + ${contato.id}}">
+                                                <button type="button">Editar</button>
+                                            </a> -->
+                                        </div>
                                     </td>
                                 </tr>
                             </tbody>
@@ -94,7 +97,9 @@
                                     <td class="td_membro">
                                         <button type="button" class="remove-button"
                                             th:attr="data-end-id=${enderecos.id}">Remover</button>
-                                        <button type="button">Editar</button> 
+                                            <!-- <a th:href="@{'/enderecoEdit/' + ${enderecos.id}}">
+                                                <button type="button">Editar</button>
+                                            </a> -->
                                     </td>
                                 </tr>
                             </tbody>
@@ -109,10 +114,18 @@
                     <button type="button" class="butao" style="margin: 0px 0px 4px 4px">Sair / LogOff</button>
                 </a>
             </div>
-            <div class="form-group">
+            <div class="form-group" style="gap: 10px">
                 <a th:href="@{/home}">
                     <button type="button" class="butao">Voltar</button>
                 </a>
+                <a th:href="@{/pessoa/{id}/cadastroContato(id=${id})}">
+                    <button type="button" class="butao">Adicionar Contato</button>
+                </a>
+                <div class="form-group">
+                    <a th:href="@{/pessoa/{id}/cadastroEndereco(id=${id})}">
+                        <button type="button" class="butao">Adicionar Endereco</button>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -134,105 +147,84 @@
             });
         }
 
-    // Adicione um ouvinte de evento a todos os botões de remoção
-    const removeButtons = document.querySelectorAll(".remove-button");
-    removeButtons.forEach(button => {
-        button.addEventListener("click", function () {
-            const endId = this.getAttribute("data-end-id");
+        // Adicione um ouvinte de evento a todos os botões de remoção
+        const removeButtons = document.querySelectorAll(".remove-button");
+        removeButtons.forEach(button => {
+            button.addEventListener("click", function () {
+                const endId = this.getAttribute("data-end-id");
 
-            // Envie uma solicitação para o servidor para remover o membro
-            fetch(`/removeEnd/${endId}`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-            })
-                .then(response => {
-                    if (response.status === 200) {
-                        alert("Endereco Removido com sucesso.");
-                        window.location.reload(); // Recarrega a página
-                        // Atualize a lista de membros após a remoção
-                    } else {
-                        alert("Erro ao remover o Endereco.");
-                    }
-                });
+                // Envie uma solicitação para o servidor para remover o membro
+                fetch(`/removeEnd/${endId}`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                })
+                    .then(response => {
+                        if (response.status === 200) {
+                            alert("Endereco Removido com sucesso.");
+                            window.location.reload(); // Recarrega a página
+                            // Atualize a lista de membros após a remoção
+                        } else {
+                            alert("Erro ao remover o Endereco.");
+                        }
+                    });
+            });
         });
-    });
 
 
-    const removeContatoButtons = document.querySelectorAll(".remove-contato-button");
-    removeContatoButtons.forEach(button => {
-        button.addEventListener("click", function () {
-            const contatoId = this.getAttribute("data-contato-id");
+        const removeContatoButtons = document.querySelectorAll(".remove-contato-button");
+        removeContatoButtons.forEach(button => {
+            button.addEventListener("click", function () {
+                const contatoId = this.getAttribute("data-contato-id");
 
-            // Envie uma solicitação para o servidor para remover o membro
-            fetch(`/removeContato/${contatoId}`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-            })
-                .then(response => {
-                    if (response.status === 200) {
-                        alert("Contato Removido com sucesso.");
-                        window.location.reload(); // Recarrega a página
-                        // Atualize a lista de membros após a remoção
-                    } else {
-                        alert("Erro ao remover o contato.");
-                    }
-                });
+                // Envie uma solicitação para o servidor para remover o membro
+                fetch(`/removeContato/${contatoId}`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                })
+                    .then(response => {
+                        if (response.status === 200) {
+                            alert("Contato Removido com sucesso.");
+                            window.location.reload(); // Recarrega a página
+                            // Atualize a lista de membros após a remoção
+                        } else {
+                            alert("Erro ao remover o contato.");
+                        }
+                    });
+            });
         });
-    });
 
-    const removePessoaButtons = document.querySelectorAll(".remove-pessoa-button");
-    removePessoaButtons.forEach(button => {
-        button.addEventListener("click", function () {
-            const pessoaId = this.getAttribute("data-pessoa-id");
+        const removePessoaButtons = document.querySelectorAll(".remove-pessoa-button");
+        removePessoaButtons.forEach(button => {
+            button.addEventListener("click", function () {
+                const pessoaId = this.getAttribute("data-pessoa-id");
 
-            // Envie uma solicitação para o servidor para remover o membro
-            fetch(`/removePessoa/${pessoaId}`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-            })
-                .then(response => {
-                    if (response.status === 200) {
-                        alert("Pessoa Removido com sucesso.");
-                        window.location.href = '/home';
-                    } else {
-                        alert("Erro ao remover  pessoa.");
-                    }
-                });
+                // Envie uma solicitação para o servidor para remover o membro
+                fetch(`/removePessoa/${pessoaId}`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                })
+                    .then(response => {
+                        if (response.status === 200) {
+                            alert("Pessoa Removido com sucesso.");
+                            window.location.href = '/home';
+                        } else {
+                            alert("Erro ao remover  pessoa.");
+                        }
+                    });
+            });
         });
-    });
 
 
     </script>
 
 </body>
 
-<!-- <div>
-        <h2 th:text="${infoPessoa.nome}"> </h2>
-    </div>
-    <p th:text="${infoPessoa.CPF}"></p>
-
-    <div class="form-group">
-        <a th:href="@{/pessoa/{id}/cadastroContato(id=${id})}">
-            <button type="button" class="butao">Adicionar Contato</button>
-        </a>
-    </div>
-
-    <div class="form-group">
-        <a th:href="@{/pessoa/{id}/cadastroEndereco(id=${id})}">
-            <button type="button" class="butao">Adicionar Endereco</button>
-        </a>
-    </div>
-    <div class="form-group">
-        <a th:href="@{/home}">
-            <button type="button" class="butao">Voltar</button>
-        </a>
-    </div> -->
 
 
 </html>

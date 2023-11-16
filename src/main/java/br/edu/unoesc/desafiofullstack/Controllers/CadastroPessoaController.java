@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import br.edu.unoesc.desafiofullstack.Autenticacao.AutenticacaoService;
 import br.edu.unoesc.desafiofullstack.Entidades.Pessoa;
 import br.edu.unoesc.desafiofullstack.Record.PessoaRecord;
-import br.edu.unoesc.desafiofullstack.Repositories.ContatoPessoaRepository;
 import br.edu.unoesc.desafiofullstack.Repositories.PessoaRepository;
 import jakarta.servlet.http.HttpSession;
 
@@ -21,9 +20,6 @@ public class CadastroPessoaController {
     private AutenticacaoService autenticacaoService;
     @Autowired
     private PessoaRepository pessoaRepository;
-    @Autowired
-    private ContatoPessoaRepository contatoPessoaRepository;
-
     @GetMapping
     public String CadPessoa(HttpSession session) {
         if (autenticacaoService.isUsuarioLogado(session)) {
