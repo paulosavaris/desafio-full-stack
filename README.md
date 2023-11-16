@@ -79,4 +79,5 @@ Alguns campos dos cadastros nao sao obrigatorios.
 
 Como fiz a pouco tempo o TCC nos mesmos modelos, tive reutilizacao de codigo, principalmente no html e CSS 
 
+Script do Banco se encontra em Banco de dados/ ScriptDB
 
