@@ -69,7 +69,6 @@ para acessar as outras telas de cadastro, o usuario deve voltar para a tela home
 Assim sera encaminhado para outra tela, tendo a escolha de adicionar contatos e enderecos, a 2 accordions para exibir os dados ja cadastrados.
 Os botoes aparentes nas telas sao funcionais e fazem sua respectiva funcao.
 
-nao tem edicao do cadastrado :(
 
 
 ### Comentarios / suposições 
